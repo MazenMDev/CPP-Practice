@@ -128,3 +128,131 @@ int main(){
 	add(y,200,a2);
 
 }
+
+//A Fixed version 
+#include <iostream>
+using namespace std;
+
+void read(int x[], int N) {
+    for (int i = 0; i < N; i++) {
+        cin >> x[i];
+    }
+}
+
+void gen(int x[], int N, int y[], int &pos, int &pos2) {
+    int check = 0;
+    int k = 0;  // Fixed uninitialized variable
+    
+    //* Find positions
+    for (int i = 0; i < N; i++) {
+        if (check == 0 && x[i] == (i / 2)) {
+            pos = i;
+            check++;
+        }
+        if (x[i] == (i / 2)) {
+            pos2 = i;
+        }
+    }
+    //* Positions found
+
+    //! Process right side
+    for (int i = 0; i < pos; i++) {
+        if (x[i] % 2 != 0) {
+            y[k] = x[i];
+            k++;
+        }
+    }
+    
+    //todo Fill the right side
+    for (int i = 0; i < pos; i++) {
+        if (y[i] <= 0) {
+            y[i] = -1;
+        }
+    }
+    y[pos] = x[pos];
+
+    //! Process left side
+    k = N - 1;  // Fix: Ensure `k` starts at last index
+    for (int i = N - 1; i > pos2; i--) {
+        if (x[i] % 2 != 0) {
+            y[k] = x[i];
+            k--;
+        }
+    }
+
+    //todo Fill the left side
+    for (int i = N - 1; i > pos2; i--) {
+        if (y[i] <= 0) {
+            y[i] = -1;
+        }
+    }
+    y[pos2] = x[pos2];
+
+    //?: Fill between pos and pos2
+    for (int i = pos + 1; i < pos2; i++) {
+        y[i] = -1;
+    }
+}
+
+void avg(int x[], int &pos, int &pos2, int &avg) {
+    int tot = 0, count = 0;
+    
+    for (int i = pos + 1; i < pos2; i++) {
+        tot += x[i];
+        count++;
+    }
+    
+    avg = (count > 0) ? (tot / count) : 0;  // Fixed division by zero issue
+}
+
+void add(int y[], int N, int &avg) {
+    for (int i = 0; i < N; i++) {
+        y[i] += avg;
+    }
+}
+
+void addbad(int q[], int N, int &avg) {
+    for (int i = 0; i < N; i++) {
+        if (q[i] < 0) {
+            q[i] += avg;
+        }
+    }
+}
+
+int main() {
+    int x[200], y[200];
+    int q[600], w[600], z[600];
+    int pos, pos2;
+    int a1, a2;
+
+    read(x, 200);
+    gen(x, 200, y, pos, pos2);
+    avg(x, pos, pos2, a1);
+    avg(y, pos, pos2, a2);
+    add(y, 200, a1);
+    add(y, 200, a2);
+
+    read(q, 600);
+    gen(q, 600, z, pos, pos2);
+    add(z, 600, a1);
+    avg(q, pos, pos2, a1);
+    avg(z, pos, pos2, a2);
+    add(z, 600, a1);
+    add(z, 600, a2);
+
+    read(w, 600);
+    gen(w, 600, q, pos, pos2);
+    avg(w, pos, pos2, a1);
+    avg(q, pos, pos2, a2);
+    addbad(q, 600, a1);
+    addbad(q, 600, a2);
+
+    read(y, 200);
+    gen(y, 200, x, pos, pos2);
+    read(q, 600);
+    gen(w, 600, z, pos, pos2);
+    avg(x, pos, pos2, a1);
+    avg(y, pos, pos2, a2);
+    add(y, 200, a1);
+    add(y, 200, a2);
+}
