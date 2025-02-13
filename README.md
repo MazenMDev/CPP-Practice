@@ -6,7 +6,7 @@ Welcome to my **C++ Practice** repository! Here, I upload my C++ learning journe
 - **Functions/** → Basic, recursive, and lambda functions.
 - **Arrays/** → One-dimensional, two-dimensional, and array-based operations.
 - **OOP/** → Classes, objects, inheritance, polymorphism, and more.
-
+**And more while learning** 🔭
 ## 🌱 What I'm Learning
 ✅ Functions  
 ✅ Loops & Arrays  
