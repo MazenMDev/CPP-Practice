@@ -13,14 +13,12 @@ int main(){
 			cin>>rank[r][c];
 			if (rank[r][c] == 1)
 			{
-				count++;
-				if (maxcount < count)
-				{
-					maxcount = count;
-					TheBest = r;
-				}
-			}	
+				count++;	
 		}
+	   if (maxcount < count) {
+       	      maxcount = count;
+              TheBest = r;
+    }
 	}
 	cout << "Clubs who get the first place is: ";
 	for(int r=0; r<20; r++){
