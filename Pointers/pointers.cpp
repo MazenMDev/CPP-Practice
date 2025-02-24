@@ -7,4 +7,5 @@ int main(){
 	w = &y;
 	cout << w << endl;
 	cout << &w << endl;
+	cout << *w << endl;
 }
