@@ -26,6 +26,6 @@ int main(){
 	cout << endl;
 	cout << endl;
 	cout << endl << endl;
-	cout << y;
+	cout << y << endl;
 }
 >>>>>>> 89b8871 (test the pointers)
